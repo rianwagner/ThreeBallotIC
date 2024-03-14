@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicializar Cédulas</title>
+</head>
+<body>
+    <h1>Inicializar Cédulas</h1>
+    <button onclick="initializeBallots()">Inicializar Cédulas</button>
+    <script>
+        function initializeBallots() {
+            fetch('/initialize_ballots')
+                .then(response => response.json())
+                .then(data => console.log(data));
+        }
+    </script>
+</body>
+</html>

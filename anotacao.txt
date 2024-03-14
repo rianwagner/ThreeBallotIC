@@ -1,0 +1,33 @@
+ 2 servidores
+ servidor a valida o voto
+ id das cedulas é criptografado coma  chave publica de b
+ para o recibo o servidor b é usado
+ para contagem final servidor b solicita as cedulas, descriptografa e valida 
+
+
+prova de decriptação
+ate dezembro o sistema ok
+lab da milene
+
+from flask import Flask, render_template
+from flask_socketio import SocketIO
+
+app = Flask(__name__)
+socketio = SocketIO(app, cors_allowed_origins="*")
+
+# Rota para a página inicial
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+# Evento de WebSocket para serverB
+@socketio.on('connect', namespace='/serverB')
+def handle_serverB_connect():
+    print('Cliente conectado a serverB')
+
+# Evento para enviar mensagem de B para C
+def send_message_to_serverC(message):
+    socketio.emit('message_from_serverB_to_serverC', message, namespace='/serverC')
+
+if __name__ == '__main__':
+    socketio.run(app, debug=True, ssl_context=('server.crt', 'server.key'))

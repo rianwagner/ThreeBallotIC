@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processar Cédulas</title>
+</head>
+<body>
+    <h1>Processar Cédulas</h1>
+    <button onclick="processBallots()">Processar Cédulas</button>
+    <script>
+        function processBallots() {
+            // Simulação de cédulas encriptadas
+            const encryptedBallots = ['cédula1', 'cédula2', 'cédula3'];
+            fetch('/process_ballots', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(encryptedBallots)
+            })
+            .then(response => response.text())
+            .then(data => console.log(data));
+        }
+    </script>
+</body>
+</html>
